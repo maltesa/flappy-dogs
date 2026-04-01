@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Floppy Dogs</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="game-copy">
+        <p class="eyebrow">Browser Game</p>
+        <h1>Floppy Dogs</h1>
+        <p class="intro">
+          Zwei fliegende Hunde, eine schlechte Idee und sehr viele Rohre.
+          Waehle vor dem Start deinen Vierbeiner und halte ihn in der Luft.
+        </p>
+      </section>
+
+      <section class="game-panel">
+        <div class="hud">
+          <div>
+            <span class="hud-label">Score</span>
+            <strong id="score">0</strong>
+          </div>
+          <div>
+            <span class="hud-label">Best</span>
+            <strong id="best-score">0</strong>
+          </div>
+          <button id="fullscreen-button" class="hud-button" type="button">
+            Fullscreen
+          </button>
+        </div>
+
+        <div class="canvas-frame">
+          <canvas
+            id="game"
+            width="960"
+            height="540"
+            aria-label="Floppy Dogs game canvas"
+          ></canvas>
+
+          <div class="overlay" id="menu-overlay">
+            <div class="menu-card">
+              <p class="eyebrow">Spielmodus</p>
+              <h2>Solo oder 2 Spieler?</h2>
+              <p class="menu-copy">
+                Im Mehrspielermodus spielen zwei Leute gleichzeitig an einem
+                Geraet. Danach waehlt ihr eure Hunde.
+              </p>
+
+              <div class="mode-switch" id="mode-switch">
+                <button class="mode-button selected" data-mode="single" type="button">
+                  Solo
+                </button>
+                <button class="mode-button" data-mode="multi_versus" type="button">
+                  2 Spieler Versus
+                </button>
+                <button class="mode-button" data-mode="multi_coop" type="button">
+                  2 Spieler Koop
+                </button>
+              </div>
+
+              <div class="selection-layout" id="selection-layout">
+                <section class="player-select" id="player-select-p1">
+                  <div class="player-select-head">
+                    <p class="eyebrow">Spieler 1</p>
+                    <p class="menu-copy">Leicht und schnell oder gross und traeger.</p>
+                  </div>
+                  <div class="dog-grid" id="dog-grid-p1"></div>
+                </section>
+
+                <section class="player-select hidden-slot" id="player-select-p2">
+                  <div class="player-select-head">
+                    <p class="eyebrow">Spieler 2</p>
+                    <p class="menu-copy">Eigene Hundewahl und eigene Flugtaste.</p>
+                  </div>
+                  <div class="dog-grid" id="dog-grid-p2"></div>
+                </section>
+              </div>
+
+              <button id="start-button" class="primary-button" disabled>
+                Spiel starten
+              </button>
+              <p class="hint" id="menu-hint">
+                Solo: Leertaste, Pfeil nach oben, Mausklick oder Tap. Bremsen
+                mit Pfeil nach unten oder S.
+              </p>
+            </div>
+          </div>
+
+          <div class="overlay hidden" id="game-over-overlay">
+            <div class="menu-card compact">
+              <p class="eyebrow">Abgestuerzt</p>
+              <h2 id="game-over-title">Noch ein Versuch?</h2>
+              <p class="menu-copy" id="game-over-copy">
+                Dein Hund hat ein Rohr gekuesst.
+              </p>
+              <button id="restart-button" class="primary-button">
+                Nochmal fliegen
+              </button>
+              <button id="change-dog-button" class="secondary-button">
+                Hund wechseln
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="game.js"></script>
+  </body>
+</html>
