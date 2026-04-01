@@ -1516,74 +1516,32 @@ function drawGround() {
 }
 
 function drawHudText() {
-  const titleWidth = isMultiplayerMode() ? 560 : 430;
-  const titleHeight = isMultiplayerMode() ? 108 : 82;
-  drawRoundedRect(18, 18, titleWidth, titleHeight, 20, "rgba(8, 18, 38, 0.38)");
+  if (state.status !== "menu") {
+    return;
+  }
+
+  const panelWidth = isMultiplayerMode() ? 520 : 360;
+  const panelHeight = 62;
+  const panelX = (WORLD.width - panelWidth) / 2;
+  const panelY = WORLD.height - WORLD.groundHeight - panelHeight - 18;
+
+  drawRoundedRect(panelX, panelY, panelWidth, panelHeight, 20, "rgba(8, 18, 38, 0.46)");
   ctx.fillStyle = "#f6f0e5";
-  ctx.font = '700 22px "Avenir Next", "Trebuchet MS", sans-serif';
+  ctx.textAlign = "center";
+  ctx.font = '700 20px "Avenir Next", "Trebuchet MS", sans-serif';
   ctx.fillText(
     state.gameMode === "multi_versus"
-      ? "2 Spieler local versus"
+      ? "2 Spieler Versus"
       : state.gameMode === "multi_coop"
-        ? "2 Spieler koop"
+        ? "2 Spieler Koop"
         : `${state.players[0]?.dog.name || "Hund"} fliegt`,
-    34,
-    48,
+    WORLD.width / 2,
+    panelY + 24,
   );
   ctx.fillStyle = "rgba(246, 240, 229, 0.76)";
-  ctx.font = '500 15px "Avenir Next", "Trebuchet MS", sans-serif';
-
-  if (state.status === "playing") {
-    if (isMultiplayerMode()) {
-      const p1 = state.players.find((player) => player.id === "p1");
-      const p2 = state.players.find((player) => player.id === "p2");
-      const p1Active = p1?.activePowerupType
-        ? ` aktiv ${getPowerupName(p1.activePowerupType)} ${p1.powerupTimer.toFixed(1)}s`
-        : "";
-      const p2Active = p2?.activePowerupType
-        ? ` aktiv ${getPowerupName(p2.activePowerupType)} ${p2.powerupTimer.toFixed(1)}s`
-        : "";
-      ctx.fillText(
-        `P1 ${p1?.score ?? 0}P L${p1?.lives ?? 0} Slot ${getPowerupName(p1?.inventoryPowerupType)}${p1Active}`,
-        34,
-        72,
-      );
-      ctx.fillText(
-        `P2 ${p2?.score ?? 0}P L${p2?.lives ?? 0} Slot ${getPowerupName(p2?.inventoryPowerupType)}${p2Active}`,
-        34,
-        94,
-      );
-    } else {
-      const solo = state.players[0];
-      const streakText =
-        solo && solo.score >= 50
-          ? ` | Bonus ${solo.postFiftyStreak}/5`
-          : "";
-      const powerupText = solo?.activePowerupType
-        ? ` | ${getPowerupName(solo.activePowerupType)} aktiv ${solo.powerupTimer.toFixed(1)}s`
-        : solo?.inventoryPowerupType
-          ? ` | E: ${getPowerupName(solo.inventoryPowerupType)} einsetzen`
-          : "";
-      const brakeText = state.isBraking ? " | Bremse aktiv" : "";
-      ctx.fillText(
-        `Tippen oder Leertaste | Leben ${solo?.lives ?? 0}${streakText}${powerupText}${brakeText}`,
-        34,
-        72,
-      );
-    }
-  } else if (state.status === "countdown") {
-    ctx.fillText(
-      isMultiplayerMode()
-        ? "P1: Space/Up, Power-up E | P2: W, Power-up Q"
-        : "Bereit machen, Start in 3 Sekunden",
-      34,
-      72,
-    );
-  } else if (state.status === "menu") {
-    ctx.fillText("Hund waehlen und starten", 34, 72);
-  } else {
-    ctx.fillText("Nochmal fliegen oder Hund wechseln", 34, 72);
-  }
+  ctx.font = '500 14px "Avenir Next", "Trebuchet MS", sans-serif';
+  ctx.fillText("Hund waehlen und Spiel starten", WORLD.width / 2, panelY + 46);
+  ctx.textAlign = "start";
 }
 
 function drawPowerupWarning() {
