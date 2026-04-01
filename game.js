@@ -20,7 +20,8 @@ const dogGridP2 = document.getElementById("dog-grid-p2");
 const controlsGuide = document.getElementById("controls-guide");
 const controlsCardP2 = document.getElementById("controls-card-p2");
 
-const STORAGE_KEY = "floppy-dogs-best-score";
+const STORAGE_KEY = "flappy-dogs-best-score";
+const LEGACY_STORAGE_KEY = "floppy-dogs-best-score";
 
 const dogs = [
   {
@@ -111,7 +112,7 @@ const state = {
   balls: [],
   cloudPuffs: [],
   score: 0,
-  bestScore: Number(localStorage.getItem(STORAGE_KEY) || 0),
+  bestScore: Number(localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY) || 0),
   pipeSpawnCount: 0,
   nextPowerupAt: 4,
   spawnDistance: 308,
@@ -378,6 +379,7 @@ function maybeSaveBestScore() {
   if (state.score > state.bestScore) {
     state.bestScore = state.score;
     localStorage.setItem(STORAGE_KEY, String(state.bestScore));
+    localStorage.removeItem(LEGACY_STORAGE_KEY);
     updateScore();
   }
 }

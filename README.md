@@ -5,7 +5,20 @@ Ihr braucht fuer das Spiel selbst kein `npm install`.
 
 ## Was Papa einmal einrichten sollte
 
-Diese Schritte sind fuer einen Windows-Rechner mit WSL gedacht, weil das laut OpenAI der einfachste Weg ist, Codex auf Windows zu nutzen:
+Diese Schritte sind fuer einen Windows-Rechner gedacht. Der einfachste Weg ist:
+
+1. **Codex Desktop fuer Windows installieren**
+2. **WSL installieren**, damit das Projekt in einer Linux-Umgebung laeuft
+3. **Git und Python in WSL installieren**
+
+So muss Papa `npm` nicht extra nur fuer Codex installieren.
+
+OpenAI-Doku:
+
+- [Codex auf Windows](https://developers.openai.com/codex/windows)
+- [OpenAI Developers](https://developers.openai.com/)
+
+### Einfache Einrichtung mit Codex Desktop
 
 1. Windows Terminal oder PowerShell **als Administrator** oeffnen.
 2. WSL installieren:
@@ -25,30 +38,20 @@ sudo apt update
 sudo apt install -y git python3 curl
 ```
 
-8. Node in WSL installieren:
+8. Codex Desktop installieren und mit dem OpenAI/ChatGPT-Account anmelden.
 
-```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
-```
-
-Danach ein neues WSL-Terminal oeffnen und dann:
-
-```bash
-nvm install 22
-```
-
-9. Codex in WSL installieren:
-
-```bash
-npm i -g @openai/codex
-```
-
-Offizielle OpenAI-Anleitung fuer Codex auf Windows:
-[https://developers.openai.com/codex/windows](https://developers.openai.com/codex/windows)
+Danach kann Codex Desktop die Kommandos in eurem Projekt fuer euch ausfuehren.
 
 ## Projekt nach Hause klonen
 
 Am einfachsten ist es, das Repo in WSL unter dem Linux-Home-Ordner zu speichern, nicht unter `C:\`.
+
+Wenn ihr mit Codex arbeitet, koennt ihr Codex auch einfach den Repo-Link geben und zum Beispiel sagen:
+
+- `Please clone https://github.com/maltesa/flappy-dogs.git into ~/code and help me run it.`
+- `Open this repo and start the game locally: https://github.com/maltesa/flappy-dogs.git`
+
+Dann kann Codex die noetigen Terminal-Kommandos in WSL fuer euch ausfuehren.
 
 ```bash
 mkdir -p ~/code
@@ -92,7 +95,32 @@ Dann im Browser oeffnen:
 
 ## Mit Codex weiterbauen
 
-Im Projektordner:
+Am einfachsten ist Codex Desktop. Ihr koennt Codex einfach den Repo-Link oder den Projektordner geben und zum Beispiel schreiben:
+
+- `Please open this repo and help me run the game: https://github.com/maltesa/flappy-dogs.git`
+- `Please clone this repo into ~/code and run it for me: https://github.com/maltesa/flappy-dogs.git`
+- `Please open /home/<euer-name>/code/flappy-dogs and help me add a new dog.`
+
+Codex kann dann die noetigen Terminal-Kommandos fuer euch ausfuehren.
+
+### Optional: Codex CLI statt Desktop
+
+Nur wenn ihr lieber die Terminal-Version von Codex nutzen wollt, braucht ihr zusaetzlich Node und npm.
+
+Dann im Projektordner:
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+```
+
+Neues WSL-Terminal oeffnen, dann:
+
+```bash
+nvm install 22
+npm i -g @openai/codex
+```
+
+Und danach:
 
 ```bash
 cd ~/code/flappy-dogs
@@ -159,6 +187,8 @@ node -v
 npm -v
 codex
 ```
+
+- Wenn ihr Codex Desktop benutzt, betrifft euch dieser letzte Punkt meist nicht. Dann ist die CLI gar nicht noetig.
 
 ## Wichtig
 
