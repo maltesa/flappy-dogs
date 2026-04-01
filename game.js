@@ -17,6 +17,8 @@ const selectionLayout = document.getElementById("selection-layout");
 const playerSelectP2 = document.getElementById("player-select-p2");
 const dogGridP1 = document.getElementById("dog-grid-p1");
 const dogGridP2 = document.getElementById("dog-grid-p2");
+const controlsGuide = document.getElementById("controls-guide");
+const controlsCardP2 = document.getElementById("controls-card-p2");
 
 const STORAGE_KEY = "floppy-dogs-best-score";
 
@@ -392,6 +394,8 @@ function setGameMode(mode) {
 }
 
 function updateMenuHint() {
+  controlsGuide.classList.toggle("multi", isMultiplayerMode());
+  controlsCardP2.classList.toggle("hidden-slot", !isMultiplayerMode());
   menuHint.textContent =
     state.gameMode === "multi_versus"
       ? "Versus: P1 mit Leertaste oder Pfeil hoch, Power-up mit E. P2 mit W, Power-up mit Q."

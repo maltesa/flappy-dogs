@@ -340,6 +340,39 @@ canvas {
     background 160ms ease;
 }
 
+.controls-guide {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.controls-guide.multi {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.controls-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 0.85rem 0.95rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.control-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.32rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.control-row strong {
+  color: var(--text-main);
+  font-size: 0.9rem;
+  text-align: right;
+}
+
 .primary-button {
   background: linear-gradient(135deg, var(--accent), var(--accent-strong));
   color: #17223a;
@@ -466,6 +499,10 @@ body.game-fullscreen canvas {
   }
 
   .selection-layout.multi {
+    grid-template-columns: 1fr;
+  }
+
+  .controls-guide.multi {
     grid-template-columns: 1fr;
   }
 
